@@ -1,0 +1,223 @@
+{
+ "tag": "MSPRE",
+ "outcome_column": "ext__mspre_cases",
+ "outcome_label_en": "Examinees with one or two metabolic syndrome risk components ('caution group') among those assessed for metabolic risk at the National General Health Screening (NHIS health screening statistics DT_35007_N135, annual)",
+ "disease_en": "Screen-assessed metabolic caution group (1-2 of 5 metabolic syndrome components)",
+ "disease_ko": "검진 대사증후군 주의군(위험요인 1~2개 보유)",
+ "offset": "ext__mspre_examinees",
+ "exclude_years": [],
+ "forced": [
+  "ext__urban_population_share",
+  "ext__physicians_per_1000",
+  "ext__sex_ratio",
+  "ext__fiscal_independence",
+  "ext__pop80_share"
+ ],
+ "negative_controls": [
+  "ext__hit_and_run_rate",
+  "ext__traffic_culture_index",
+  "ext__fires_per_10000"
+ ],
+ "offset_E_column": "E_std",
+ "offset_E_file": "MSPRE_Estd3s.csv",
+ "offset_E_label": "sex-and-age-standardised expected caution-group cases, 2 sexes x 15 age bands (<=19, 20-24 to 80-84, 85+) (national screening rates DT_35007_N136; district examinee age structure approximated from resident population x national uptake, sex totals observed), 2019-2024",
+ "graph": "593-edge contact graph, ST_GRAPH=04_분석/MSPRE/graph_593.graph",
+ "sensitivity_only_extra": [
+  "ext__unmet_need_rate",
+  "ext__living_alone_elderly"
+ ],
+ "sets": {
+  "S1_narrative_full": [
+   "ext__nutrition_label_use_rate",
+   "ext__weight_control_rate",
+   "ext__perceived_stress_rate",
+   "ext__depressive_mood_rate",
+   "kchs__DT_H_OBE_OBE__SR",
+   "ext__high_risk_drinking",
+   "ext__smoking_rate",
+   "ext__tertiary_educated_share",
+   "ext__basic_livelihood_rate",
+   "ext__single_person_household_share",
+   "ext__screening_uptake"
+  ],
+  "S2_core": [
+   "ext__nutrition_label_use_rate",
+   "ext__perceived_stress_rate",
+   "kchs__DT_H_OBE_OBE__SR",
+   "ext__tertiary_educated_share",
+   "ext__basic_livelihood_rate",
+   "ext__screening_uptake"
+  ],
+  "S3_diet_weight": [
+   "ext__nutrition_label_use_rate",
+   "ext__weight_control_rate",
+   "kchs__DT_H_OBE_OBE__SR"
+  ],
+  "S4_psychosocial": [
+   "ext__perceived_stress_rate",
+   "ext__depressive_mood_rate",
+   "ext__single_person_household_share"
+  ],
+  "S5_risk_behaviour": [
+   "kchs__DT_H_OBE_OBE__SR",
+   "ext__high_risk_drinking",
+   "ext__smoking_rate"
+  ],
+  "S6_socioeconomic_detection": [
+   "ext__tertiary_educated_share",
+   "ext__basic_livelihood_rate",
+   "ext__single_person_household_share",
+   "ext__screening_uptake"
+  ]
+ },
+ "transform": {
+  "ext__urban_population_share": "none",
+  "ext__physicians_per_1000": "none",
+  "ext__sex_ratio": "none",
+  "ext__fiscal_independence": "none",
+  "ext__pop80_share": "none",
+  "ext__hit_and_run_rate": "none",
+  "ext__traffic_culture_index": "none",
+  "ext__fires_per_10000": "none",
+  "ext__unmet_need_rate": "none",
+  "ext__living_alone_elderly": "none",
+  "ext__nutrition_label_use_rate": "none",
+  "ext__weight_control_rate": "none",
+  "ext__perceived_stress_rate": "none",
+  "ext__depressive_mood_rate": "none",
+  "kchs__DT_H_OBE_OBE__SR": "none",
+  "ext__high_risk_drinking": "none",
+  "ext__smoking_rate": "none",
+  "ext__tertiary_educated_share": "none",
+  "ext__basic_livelihood_rate": "none",
+  "ext__single_person_household_share": "none",
+  "ext__screening_uptake": "none"
+ },
+ "expected_direction": {
+  "ext__nutrition_label_use_rate": "-",
+  "ext__weight_control_rate": "±",
+  "ext__perceived_stress_rate": "+",
+  "ext__depressive_mood_rate": "+",
+  "kchs__DT_H_OBE_OBE__SR": "+",
+  "ext__high_risk_drinking": "+",
+  "ext__smoking_rate": "+",
+  "ext__tertiary_educated_share": "-",
+  "ext__basic_livelihood_rate": "+",
+  "ext__single_person_household_share": "+",
+  "ext__screening_uptake": "±"
+ },
+ "rules": {
+  "likelihood": "forced-only 모형 WAIC 낮은 쪽(Poisson/NB)",
+  "set_choice": "WAIC 최소, 4 이내면 변수 적은 세트",
+  "credible": "95% CrI 1 제외",
+  "vif_drop": 10,
+  "multiverse_specs": 200,
+  "main_model_note": "Principal model = S1_narrative_full (11 district characteristics + 5 forced controls). VIF>10 retained and reported.",
+  "years": [
+   2019,
+   2024
+  ],
+  "windows": {
+   "W1_2019-21": [
+    2019,
+    2021
+   ],
+   "W2_2022-24": [
+    2022,
+    2024
+   ]
+  },
+  "covid_post_from": 2020
+ },
+ "note": "Outcome: examinees with one or two metabolic syndrome components (caution group) at the general health screening (NHIS, KOSIS DT_35007_N135), 229 districts, 2019-2024 (2013-2017 in the aux version); denominator examinees assessed for metabolic risk components; expected counts standardised for sex and 15 age groups.",
+ "extra_columns": {
+  "ext__mspre_cases": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "mspre_cases"
+  ],
+  "ext__mspre_examinees": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "mspre_examinees"
+  ],
+  "ext__urban_population_share": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "urban_population_share"
+  ],
+  "ext__physicians_per_1000": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "physicians_per_1000"
+  ],
+  "ext__sex_ratio": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "sex_ratio"
+  ],
+  "ext__fiscal_independence": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "fiscal_independence"
+  ],
+  "ext__pop80_share": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "pop80_share"
+  ],
+  "ext__hit_and_run_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "hit_and_run_rate"
+  ],
+  "ext__traffic_culture_index": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "traffic_culture_index"
+  ],
+  "ext__fires_per_10000": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "fires_per_10000"
+  ],
+  "ext__unmet_need_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "unmet_need_rate"
+  ],
+  "ext__living_alone_elderly": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "living_alone_elderly"
+  ],
+  "ext__nutrition_label_use_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "nutrition_label_use_rate"
+  ],
+  "ext__weight_control_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "weight_control_rate"
+  ],
+  "ext__perceived_stress_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "perceived_stress_rate"
+  ],
+  "ext__depressive_mood_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "depressive_mood_rate"
+  ],
+  "ext__high_risk_drinking": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "high_risk_drinking"
+  ],
+  "ext__smoking_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "smoking_rate"
+  ],
+  "ext__tertiary_educated_share": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "tertiary_educated_share"
+  ],
+  "ext__basic_livelihood_rate": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "basic_livelihood_rate"
+  ],
+  "ext__single_person_household_share": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "single_person_household_share"
+  ],
+  "ext__screening_uptake": [
+   "EXT_canonical_pool_MSPRE_v2_261118.csv",
+   "screening_uptake"
+  ]
+ }
+}
