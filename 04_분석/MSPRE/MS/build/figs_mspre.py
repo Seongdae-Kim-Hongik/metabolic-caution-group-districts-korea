@@ -35,9 +35,9 @@ PAL = ["#2166AC", "#67A9CF", "#D1E5F0", "#FDDBC7", "#EF8A62", "#B2182B"]
 gg.plot(ax=ax, column="SIR", cmap=ListedColormap(PAL), norm=BoundaryNorm(BR, len(PAL)), edgecolor="#a0a0a0", linewidth=LW); mapax(ax)
 gg[gg.cls == "cold"].boundary.plot(ax=ax, color="#08306B", linewidth=1.0, linestyle=(0, (2.0, 1.2))); gg[gg.cls == "hot"].boundary.plot(ax=ax, color="black", linewidth=1.1); letter(ax, "A", dy=0.95)
 h = [Patch(facecolor=c, edgecolor="#777777", linewidth=0.5, label=l) for c, l in zip(PAL, LB)] + [Patch(facecolor="none", edgecolor="black", linewidth=1.1, label="Hot spot"), Patch(facecolor="none", edgecolor="#08306B", linewidth=1.0, linestyle="--", label="Cold spot")]
-ax.legend(handles=h, title="Standardized ratio of the metabolic caution group, 2019-2024", loc="upper center", bbox_to_anchor=(0.5, 0.0), ncol=3, frameon=False, columnspacing=0.8, handlelength=1.3)
+ax.legend(handles=h, title="Standardized ratio of the early metabolic risk group, 2019-2024", loc="upper center", bbox_to_anchor=(0.5, 0.0), ncol=3, frameon=False, columnspacing=0.8, handlelength=1.3)
 b = fig.add_axes([0.62, 0.62, 0.36, 0.30]); GT = N["gate"]; yrs = sorted(int(k) for k in GT)
-SER = [("mspre_pct", "Caution group (1-2)", "#B2182B", "o"), ("n0_pct", "No component", "#7f7f7f", "s"), ("tg_pct", "High triglycerides", "#2166AC", "^"), ("hdl_pct", "Low HDL cholesterol", "#67A9CF", "v")]
+SER = [("mspre_pct", "Early-risk group (1-2)", "#B2182B", "o"), ("n0_pct", "No component", "#7f7f7f", "s"), ("tg_pct", "High triglycerides", "#2166AC", "^"), ("hdl_pct", "Low HDL cholesterol", "#67A9CF", "v")]
 for k, lab, col, mk in SER:
     for seg in ([y for y in yrs if y <= 2017], [y for y in yrs if y >= 2019]):
         b.plot(seg, [GT[str(y)][k] for y in seg], color=col, marker=mk, ms=2.8, lw=1.2, label=lab if seg[0] == yrs[0] else None)
